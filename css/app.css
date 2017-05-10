@@ -1,0 +1,108 @@
+div.gemItem {
+	padding: 1em;
+	margin: 1em 0;
+	box-shadow: none;
+	background: #FCFCFC;
+	border: 1px solid #EFEFEF;
+	border-radius: .25em;
+	transition: all 0.5s;
+}
+
+h4.review {
+	font-size: 1em;
+	width: 100%;
+	text-align: center;
+	padding: .5em 1em;
+	margin: .5em auto;
+	border-radius: .25em;
+	transition: all cubic-bezier(0.250, 0.460, 0.450, 0.940) 0.5s;
+}
+h4.review.active {
+	opacity: 0.5;
+
+}
+
+input[type=submit] {
+	border-radius: .25em;
+}
+div.formWrapper {
+	border-radius: 1em;
+	background: #EEE;
+	opacity: 0;
+	height: 0px;
+	transition: all cubic-bezier(0.250, 0.460, 0.450, 0.940) 0.5s;
+}
+div.formWrapper.active {
+	height: auto;
+	opacity: 1;
+}
+h5 {
+	color: #36A;
+}
+div.gemItem:hover {
+	box-shadow: 2px 3px 8px #CCC;
+}
+a.button.buy {
+	color: #FEFEFE;
+}
+a.button.buy:hover {
+	color: #FEFEFE;
+}
+ul.tabs {
+	border: 0px solid transparent;
+	margin-bottom: 1em;
+	background: #FCFCFC;
+}
+li.tabs-title{
+	border-radius: .25em .25em 0 0;
+	margin-right: .25em;
+	background: #F3F3F3;
+	transition: all 0.3s;
+}
+li.tabs-title a {
+	padding: 1em .5em;
+}
+
+li.tabs-title:hover {
+	background: #EFEFEF;
+}
+li.is-active, li.tabs-title.is-active:hover {
+	background: #69D;
+}
+
+li.is-active a, li.tabs-title.is-active:hover {
+	color: #fefefe;
+}
+
+blockquote {
+	font-family: Georgia, serif;
+	font-size: 18px;
+	font-style: italic;
+	width: 500px;
+	margin: 0.25em;
+	margin-left: 1em;
+	padding: 0.25em 40px;
+	line-height: 1.45;
+	position: relative;
+	color: #383838;
+	border: none;
+}
+blockquote:before {
+	display: block;
+	content: "\201C";
+	font-size: 80px;
+	position: absolute;
+	left: -20px;
+	top: -20px;
+	color: #7a7a7a;
+}
+blockquote cite {
+	color: #999999;
+	font-size: 14px;
+	display: block;
+	margin-top: 5px;
+}
+ 
+blockquote cite:before {
+	content: "\2014 \2009";
+}

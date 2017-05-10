@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html ng-app="stimHaus" ng-controller="MainCtrl">
+
+  <head>
+    <title>{{ siteTitle }}</title>
+    <meta charset="utf-8"/>
+    <link rel="stylesheet" href="css/foundation.css">
+    <link rel="stylesheet" href="css/app.css">
+    <script src="js/vendor/jquery.js"></script>
+    <script data-require="angular.js@*" data-semver="4.0.0" src="https://code.angularjs.org/latest/angular.min.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/MainCtrl.js"></script>
+    <script src="js/StoreCtrl.js"></script>
+    <script src="js/PanelCtrl.js"></script>
+    <script src="js/ReviewCtrl.js"></script>
+  </head>
+
+  <body>
+    <div class="row">
+      <div class="small-12 columns">
+
+        <h1>{{ siteTitle }}</h1>
+
+        <div ng-controller="StoreCtrl as store">    
+          <div ng-repeat="gem in store.products" class="small-12 medium-6 large-4 columns">
+            <div class="gemItem">
+              <h4>{{ gem.name | uppercase }}</h4>
+              <div class="row">
+                <div class="small-6 columns">
+                  <h5>{{ gem.price | currency }}</h5>
+                </div>
+                <div class="small-6 columns text-right">
+                  <a class="button small success buy" ng-class="{ 'disabled': gem.canPurchase }">Add to Cart</a>
+                </div>
+              </div>
+
+              <section ng-controller="PanelCtrl as panel">
+                <ul class="tabs">
+                  <li class="tabs-title" ng-class="{'is-active':panel.isSelected(1)}"><a href ng-click="panel.selectTab(1)">Description</a></li>
+                  <li class="tabs-title" ng-class="{'is-active':panel.isSelected(2)}"><a href ng-click="panel.selectTab(2)">Specifications</a></li>
+                  <li class="tabs-title" ng-class="{'is-active':panel.isSelected(3)}"><a href ng-click="panel.selectTab(3)">Reviews</a></li>
+                </ul>
+                <div ng-show="panel.isSelected(1)">
+                  <h4>Description</h4>
+                  <blockquote>{{ gem.description }}</blockquote>
+                </div>
+                <div ng-show="panel.isSelected(2)">
+                  <h4>Specifications</h4>
+                  <blockquote>None yet</blockquote>
+                </div>
+                <div ng-show="panel.isSelected(3)">
+
+                  <h4>Reviews</h4>
+
+                  <blockquote ng-repeat="review in gem.reviews">
+                    <strong>{{ review.stars }}<span ng-show="review.stars">&nbsp; Stars</span></strong>
+                    {{ review.body }}
+                    <cite>Author: {{ review.author }}</cite>
+                  </blockquote>  
+
+                  <form name="reviewForm" ng-controller="ReviewCtrl as reviewCtrl" ng-submit="reviewCtrl.addReview(gem)">
+                    <h4 class="review button" ng-click="reviewCtrl.openForm()" ng-class="{'active':reviewCtrl.formActive}">Submit a Review</h4>
+                    <div class="formWrapper callout" ng-class="{'active':reviewCtrl.formActive}" ng-show="reviewCtrl.formActive">
+                      
+                      <label>Rating</label>
+                      <select ng-model="reviewCtrl.review.stars">
+                        <option value="1">1 Star</option>
+                        <option value="2">2 Stars</option>
+                        <option value="3">3 Stars</option>
+                      </select>
+                      <label>Review</label>
+                      <textarea ng-model="reviewCtrl.review.body"></textarea>
+                      <label>E-Mail</label>
+                      <input type="email" ng-model="reviewCtrl.review.author" />
+                      <input type="submit" class="button primary" value="Submit" />
+
+                      <blockquote>
+                        <strong>Stars: {{ reviewCtrl.review.stars }}</strong>
+                        {{ reviewCtrl.review.body }}
+                        <cite>Author: {{ reviewCtrl.review.author }}</cite>
+                      </blockquote>
+
+                    </div>
+
+                  </form>   
+
+                </div>
+              </section>
+  <!--             <ul class="tabs" data-tabs ng-attr-id="{{ $index + '_tabs' }}">
+                <li class="tabs-title is-active"><a ng-href="#{{ $index + '_panel-1' }}" aria-selected="true">Tab 1</a></li>
+                <li class="tabs-title"><a ng-href="#{{ $index + '_panel-2' }}">Tab 2</a></li>
+              </ul>
+
+              <div class="tabs-content" data-tabs-content="{{ $index + '_tabs' }}">
+                <div class="tabs-panel is-active" ng-attr-id="{{ $index + '_panel-1' }}">
+                  <p>Vivamus hendrerit arcu sed erat molestie vehicula. Sed auctor neque eu tellus rhoncus ut eleifend nibh porttitor. Ut in nulla enim. Phasellus molestie magna non est bibendum non venenatis nisl tempor. Suspendisse dictum feugiat nisl ut dapibus.</p>
+                </div>
+                <div class="tabs-panel" ng-attr-id="{{ $index + '_panel-2' }}">
+                  <p>Suspendisse dictum feugiat nisl ut dapibus.  Vivamus hendrerit arcu sed erat molestie vehicula. Ut in nulla enim. Phasellus molestie magna non est bibendum non venenatis nisl tempor.  Sed auctor neque eu tellus rhoncus ut eleifend nibh porttitor.</p>
+                </div>
+              </div>  -->
+
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <script src="js/vendor/what-input.js"></script>
+    <!-- <script src="js/vendor/foundation.js"></script> -->
+  </body>
+
+</html>
